@@ -32,7 +32,7 @@ var desamovil = {
         $(page).animate({"margin-left": 0},function () {
             setTimeout(function () {
                 $(page).hide();
-            },300)
+            },200)
         });
     }  
 }
