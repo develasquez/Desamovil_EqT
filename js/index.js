@@ -32,7 +32,7 @@ var desamovil = {
         desamovil.pageShow('#main')
     },
     scan : function(target) {
-        scanner.scan(_fun(result) {
+        scanner.scan(function(result) {
             alert(result.text);
                     //    $(target).val(result.text);
         },function () {
