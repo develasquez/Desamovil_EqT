@@ -32,7 +32,9 @@ var desamovil = {
     scan : function(target) {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function(result) {
-            $(target).val(result.text);
+            setTimeout(function(){
+                $(target).val(result.text);
+            },300)
         },function () {
             
         });
