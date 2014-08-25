@@ -18,7 +18,7 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
     }
 };
-var scanner ;
+var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
 var desamovil = {
     owner:'@fvelasquezc',
