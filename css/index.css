@@ -1,0 +1,39 @@
+.results{
+    padding: 0px;
+    color: #fff;
+    font-size: 850%;
+}
+.correct{
+    display: -moz-inline-stack;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center;
+    float: left;
+    width: 45.25%;
+    border: 0px;
+    height: 100%;
+}
+.errors{
+    display: -moz-inline-stack;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    text-align: center;
+    float: right;
+    width: 45.25%;
+    border: 0px;
+    height: 100%;
+}
+
+.correct h1,.errors h1{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    margin: 0px;
+    display: -moz-inline-stack;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    font-size: 1em;
+} 

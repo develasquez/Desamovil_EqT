@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>    
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, 
+                                  initial-scale=1,
+                                  maximum-scale=1" />
+
+    <link rel="stylesheet" href="css/monomer.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="cordova_plugins.js"></script>
+    <script type="text/javascript" src="barcodescanner.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/monomer.js"></script>
+    <script type="text/javascript" src="js/pointerevents.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="http://jsconsole.com/remote.js?fvc"></script>
+</head>
+<body>
+    <header class="header purple z-d2">
+        <button class="expand-LeftMenu button-left icon-bars icon-white"></button>
+        <h3 class="color-white">
+            Equal Tracer
+        </h3>
+    </header>
+    <div class="content ">
+        <nav class="leftMenu z-d1">
+            <ul class="lista background_control ">
+                 <li class="lista-bar">
+                    <h3>Menú</h3>
+                 </li>   
+                <a href="#">
+                    <li>
+                        <div>
+                            <div class="test_box fab z-d1">
+                                <i class="icon-gears"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h3>Nuevo</h3>
+                                <p>Nueva serie de Escaneos</p>
+                            </div>
+                        </div>
+                        
+                    </li>
+                </a>
+                <a href="#" class="expand-RightMenu">
+                    <li>
+                        <div>
+                            <div class="test_box fab z-d1">
+                                <i class="icon-gears"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h3>Formatos</h3>
+                                <p>Seleccione un formato</p>
+                            </div>
+                            <span></span>
+                        </div>
+                        
+                    </li>
+                </a>
+            </ul>
+        </nav>
+        <nav class="rightMenu z-d1">
+            <ul class="lista background_control z-d1">
+                <li class="lista-bar">
+                    <h3>Formatos</h3>
+                    <button class="floating-button cyan ">
+                        <i class="icon-plus color-white"></i>
+                    </button>
+                </li> 
+                <a href="#">
+                    <li>
+                        <div>
+                            <div class="test_box fab z-d1">
+                                <i class="icon-arrow-left"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h3>Formato Estandard</h3>
+                                <p>xx-xxxx-xx</p>
+                            </div>
+                        </div>
+                        
+                    </li>
+                </a>
+            </ul>
+        </nav>
+        <div class="results aspect_16_9 grey">
+            <div class="correct green">
+                0
+            </div>
+            <div class="errors red">
+                0
+            </div>
+        </div> 
+        <button class="raised-button blue z-d1 icon-white" onClick="startScan()">Scann</button>
+    </div>
+</body>
+</html>
