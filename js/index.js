@@ -27,17 +27,12 @@ var desamovil = {
         $(".errors").text("0");
         desamovil.pageShow('#main')
     },
-    scan : function(target,fun,err) {
-
-        if(typeof target === "function"){fun = target; target = '' ;}
-        if(target.length > 0 && fun == undefined){
-            fun = function (result) {
-
-                $(target).val(result.text);
-            }
-        }
+    scan : function(target) {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-        scanner.scan(fun,err);
+        scanner.scan(function (result) {
+            alert(result.text);
+            //    $(target).val(result.text);
+            },err);
     },
     pageShow:function (page) {
         $(page).show();
