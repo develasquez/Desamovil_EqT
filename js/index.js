@@ -20,11 +20,18 @@ var desamovil = {
     owner:'@fvelasquezc',
     version:'1.0.0',
     date:'24/08/2014',
-    scan : function(fun,err) {
+    scan : function(target,fun,err) {
+        if(typeof target === "function"){fun = target; target = '' ;}
+        if(target.length > 0 && fun == undefined){
+            fun = function (result) {
+                $(target).val(result.text);
+            }
+        }
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(fun,err);
     },
     pageShow:function (page) {
+        debugger;
         $(page).show();
         $(page).animate({"margin-left": -window.innerWidth});
     },
