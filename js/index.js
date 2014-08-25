@@ -20,12 +20,19 @@ var desamovil = {
     owner:'@fvelasquezc',
     version:'1.0.0',
     date:'24/08/2014',
+    newScanSeries:function () {
+        $("#txtResultado1").val("");
+        $("#txtResultado2").val("");
+        $(".correct").text("0");
+        $(".errors").text("0");
+        desamovil.pageShow('#main')
+    },
     scan : function(target,fun,err) {
 
         if(typeof target === "function"){fun = target; target = '' ;}
         if(target.length > 0 && fun == undefined){
             fun = function (result) {
-                alert(result.text)
+
                 $(target).val(result.text);
             }
         }
@@ -33,7 +40,6 @@ var desamovil = {
         scanner.scan(fun,err);
     },
     pageShow:function (page) {
-        debugger;
         $(page).show();
         $(page).animate({"margin-left": -window.innerWidth});
     },
