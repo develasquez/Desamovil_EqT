@@ -17,10 +17,7 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
     }
 };
-var scanner;
-$(function(){
-     scanner = cordova.require("cordova/plugin/BarcodeScanner");
-})
+
 var desamovil = {
     owner:'@fvelasquezc',
     version:'1.0.0',
@@ -33,7 +30,7 @@ var desamovil = {
         desamovil.pageShow('#main')
     },
     scan : function(target) {
-        
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function(result) {
             alert(result.text);
                     //    $(target).val(result.text);
