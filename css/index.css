@@ -37,3 +37,28 @@
     zoom: 1;
     font-size: 1em;
 } 
+.background_page{
+    display: -moz-inline-stack;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    height:100%;
+    width:100%;
+}
+.page{
+    background-color: #fff;
+    top:0;
+    position:absolute;
+    display: none;
+    transition: margin-left .3s;
+    -webkit-transition: margin-left .3s; /* Safari */
+    height:100%;
+    width:100%;
+}
+
+.page h3{
+    margin-left: 1em;
+}
+.usuario{
+    margin-top: 16%;
+}

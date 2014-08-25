@@ -363,7 +363,11 @@ border: none;
     background-color: #259b24;
     border:solid 1px #259b24;
 }
+.light-green{
+   background-color: #8bc34a;
+    border:solid 1px #8bc34a;
 
+}
 .lime{
     background-color: #cddc39;
     border:solid 1px #cddc39;
@@ -651,13 +655,14 @@ input[type="checkbox"]:not(.toggle):checked:before{
 
 input[type="text"]{
     background-color: rgba(0,0,0,0);
-    border: 0px;
-    padding:.5em;
-    margin:.5em 0em .5em 1em;
-    width:80%;
+    border:     0px;
+    padding:    1em;
+    margin:     .5em 0em .5em 1em;
+    width:      80%;
+    font-size: 85%;
 }
 .text_after{
-    border:solid 2px #ccc;
+    border-top:solid 1px #ccc;
     margin:-8px 0em .5em 1em;
     width:80%;
     transition: width .5s;

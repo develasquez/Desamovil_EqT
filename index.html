@@ -11,14 +11,13 @@
 
     <link rel="stylesheet" href="css/monomer.css">
     <link rel="stylesheet" href="css/index.css">
-    <script type="text/javascript" src="cordova.js"></script>
+    <!--<script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="cordova_plugins.js"></script>
-    <script type="text/javascript" src="barcodescanner.js"></script>
+    <script type="text/javascript" src="barcodescanner.js"></script>-->
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="js/monomer.js"></script>
     <script type="text/javascript" src="js/pointerevents.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <script src="http://jsconsole.com/remote.js?fvc"></script>
 </head>
 <body>
     <header class="header purple z-d2">
@@ -26,6 +25,12 @@
         <h3 class="color-white">
             Equal Tracer
         </h3>
+        <button class="expand-config button-right icon-ellipsis-v icon-white"></button> 
+         <ul class="configMenu background_control z-d1">
+            <a href="#"><li>Login Usuario</li></a>
+            <a href="#"><li>Log Historico</li></a>
+            <a href="#"><li>Configuración</li></a>
+         </ul>
     </header>
     <div class="content ">
         <nav class="leftMenu z-d1">
@@ -71,7 +76,7 @@
         <nav class="rightMenu z-d1">
             <ul class="lista background_control z-d1">
                 <li class="lista-bar">
-                    <h3>Formatos</h3>
+                    <h3>Formatos Personalizados</h3>
                     <button class="floating-button cyan ">
                         <i class="icon-plus color-white"></i>
                     </button>
@@ -94,15 +99,40 @@
                 </a>
             </ul>
         </nav>
-        <div class="results aspect_16_9 grey">
-            <div class="correct green">
-                0
+        <div id="pages">
+            <div id="crearUsuario" class="page">
+                <div class="aspect_16_9 indigo"> 
+                    <center>
+                        <img src="img/user.png" class="usuario"> 
+                    </center>
+                </div>
+                <div class="grey">
+                    <h3 class="color-white">Crear Nuevo Usuario</h3>
+                </div>
+                
+                <input type="text" id="txtUsuario" placeholder="Nombre de Usuario" color="blue">  
+                <input type="text" id="txtPassword" placeholder="Password" color="blue">
+                <button class="raised-button blue z-d1 icon-white" onClick="">Crear Usuario</button>
+                <button class="raised-button grey z-d1 icon-white" onClick="pageClose('#crearUsuario')">Cancelar</button>
             </div>
-            <div class="errors red">
-                0
+            <div id="crearUsuario" class="page">
+                 <div class="results aspect_16_9 grey">
+                    <div class="correct green">
+                        0
+                    </div>
+                    <div class="errors red">
+                        0
+                    </div>
+                </div> 
+                <button class="raised-button blue z-d1 icon-white" onClick="startScan()">Scann</button>
             </div>
-        </div> 
-        <button class="raised-button blue z-d1 icon-white" onClick="startScan()">Scann</button>
+            <div id="crearUsuario" class="page">
+            </div>
+            <div id="crearUsuario" class="page">
+            </div>
+
+        </div>
+        <button class="raised-button blue z-d1 icon-white" onClick="pageShow('#crearUsuario')">Nuevo Usuario</button>
     </div>
 </body>
 </html>

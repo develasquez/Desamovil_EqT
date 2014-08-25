@@ -84,26 +84,44 @@
 			setTimeout(function () {
 				$(".rightMenu").hide()
 			},300)
-		}		
-
+		},
+		setInterval:function () {}		
 	}
 
 	var __displayedMenu= false;
 	var em = 16;
 	$(function () {
 		em = getEmPixels();
-		var width = window.innerWidth,
-	        height = window.innerHeight;
-	    $("body").width(width).height(height-20);
-		$(".content").height(window.innerHeight - (em * 3) -20)
+		var _window={
+	        		width :window.innerWidth,
+	            	height :window.innerHeight
+	        	}
+	            var _content={
+	        		width :window.innerWidth,
+	            	height :window.innerHeight - (em * 3) -20
+	        	}
+	    $("body").width(_window.width).height(_window.height-20);
+		$(".content").height(_content.height);
+
+
+		
+
 	    setInterval(function () {
 	    	monomer.__setAspect()
-	        if (window.innerWidth !== width || window.innerHeight !== height) {
-	            width = window.innerWidth;;
-	            height = window.innerHeight;
-	            $("body").width(width).height(height-20);
-				$(".content").height(window.innerHeight - (em * 3) -20)
+	        if (window.innerWidth !== _window.width || window.innerHeight !== _window.height) {
+	        	_window={
+	        		width :window.innerWidth,
+	            	height :window.innerHeight
+	        	}
+	            _content={
+	        		width :window.innerWidth,
+	            	height :window.innerHeight - (em * 3) -20
+	        	}
+	            $("body").width(_window.width).height(_window.height);
+				$(".content").height(_content.width)
+
 	        }
+	        monomer.setInterval(_window,_content,em)
 	    }, 50);
 	    var pointerdownLeft = 0;
 	    var SWITELONG = 30;
@@ -128,13 +146,10 @@
 
 		$('input[type="text"]').after($("<hr>").addClass("text_after"))
 		$('input[type="text"]').on("focus",function () {
-			el = $(this)
-			el.next().css("width",0)
-
-			
+			$(this).next().addClass($(this).attr("color"));
 		});
 		$('input[type="text"]').on("blur",function () {
-			$(this).next().removeClass("text_after_focused");
+			$(this).next().removeClass($(this).attr("color"));
 		});
 		$('input[type="checkbox"]').each(function (i,chkBox) {
 			chkBox.addEventListener("pointerdown",function (event) {
