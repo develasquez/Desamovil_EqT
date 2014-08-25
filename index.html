@@ -76,8 +76,8 @@
         <nav class="rightMenu z-d1">
             <ul class="lista background_control z-d1">
                 <li class="lista-bar">
-                    <h3>Formatos Personalizados</h3>
-                    <button class="floating-button cyan ">
+                    <h3>Formatos</h3>
+                    <button class="floating-button cyan " onClick="formatos.addFormat()">
                         <i class="icon-plus color-white"></i>
                     </button>
                 </li> 
@@ -125,11 +125,45 @@
                     </div>
                 </div>
                  <input type="text" id="txtResultado1" placeholder="Resultado 1" color="blue"> 
-                 <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado1')">Scann</button> 
+                 <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado1')"><i class="icon-qrcode color-white"></i></button> 
                 <input type="text" id="txtResultado2" placeholder="Resultado 2" color="blue">
-                <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado2')">Scann</button>
+                <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado2')">
+                    <i class="icon-qrcode color-white"></i>
+                </button>
             </div>
-            <div id="crearUsuario" class="page">
+            <div id="nuevoFormato" class="page">
+                <div class="aspect_16_9 black"> 
+                        <img src="img/DataMatrix.jpg" class="datamatrixImg"> 
+                </div>
+                <div class="grey" id="titleNewFormat">
+                    <h3 class="color-white">Crear Formato</h3>
+                    <button class="floating-button red " onClick="formatos.addFormat()">
+                        <i class="icon-qrcode color-white"></i>
+                    </button>
+                </div>
+                <input type="text" id="txtNewFormat" placeholder="Codigo Ejemplo" color="blue"> 
+                
+                <center>
+                    <h3 id="h3ForatCreator">
+                        XX-XXXX-?????-****
+                    </h3>
+                    <button class="raised-button blue z-d1 icon-white" onClick="">
+                        <i class="icon-arrow-left color-white"></i>
+                    </button>
+                    <button class="raised-button blue z-d1 icon-white" onClick="">
+                        <i class="icon-arrow-right color-white"></i>
+                    </button>
+                    <br>
+                    <button class="raised-button grey z-d1 icon-white" onClick="">
+                        Ignorear
+                    </button>
+                    <button class="raised-button red z-d1 icon-white" onClick="">
+                        Exacto
+                    </button>
+                    <button class="raised-button green z-d1 icon-white" onClick="">
+                        Variable
+                    </button>
+                </center>
             </div>
             <div id="crearUsuario" class="page">
             </div>

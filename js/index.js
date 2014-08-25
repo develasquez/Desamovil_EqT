@@ -17,6 +17,21 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
     }
 };
+$(function(){
+    db = window.openDatabase("EqualTracer", "1.0", "EqualTracer", 20971520);
+    db.transaction(function(tx){
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Usuarios (id unique, fullNombre, userName, password, lastLogin)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Formatos (id unique, nombreFormato, estructura)');
+    }, function(err){}, function(tx,results){
+
+    }) 
+                
+});
+
+
+
+
+
 
 var desamovil = {
     owner:'@fvelasquezc',
@@ -29,12 +44,11 @@ var desamovil = {
         $(".errors").text("0");
         desamovil.pageShow('#main')
     },
-    scan : function(target) {
+    scan : function(target,_fun) {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function(result) {
-            setTimeout(function(){
-                $(target).val(result.text);
-            },300)
+            $(target).val(result.text);
+            _fun(result);
         },function () {
             
         });
@@ -66,7 +80,36 @@ usuario={
 
     }
 }
+comparationType ={
+    EXCACT:0,
+    IGNORE:1,
+    VARIABLE:2,
+};
 
+
+formatos={
+    currentCharIndex:0,
+    currentChar:'',
+    charCount:0,
+    comparationTypeSelected:comparationType.EXCACT,
+    textScanned:'',
+    addFormat:function(){
+        desamovil.pageShow('#nuevoFormato')
+        desamovil.scan("#txtNewFormat",function(result){
+            formatos.textScanned = result.text;
+            $("#lblForatCreator").text(formatos.textScanned);
+            formatos.charCount = formatos.textScanned.length;
+        });
+    },
+    setComparationType:function(type){
+        formatos.comparationTypeSelected = type;
+    },
+    nexChar:function(type){
+        formatos.currentChar = formatos.textScanned.subString(formatos.currentCharIndex,1);
+        formatos.currentCharIndex++;
+    }
+
+}
 
 monomer.setInterval= function (_window,_content,em) {
     $(".page").css({"left":_window.width,"top":(0 + (em * 3)+14)});

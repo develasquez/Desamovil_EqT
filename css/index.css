@@ -62,3 +62,18 @@
 .usuario{
     margin-top: 7%;
 }
+.datamatrixImg{
+    width:100%;
+    height:100%;
+}
+
+#titleNewFormat h3{
+    display: -moz-inline-stack;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+
+}
+#titleNewFormat .floating-button{
+    margin:0px 0px 0px 3em;
+}
