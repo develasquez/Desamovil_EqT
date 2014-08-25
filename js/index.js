@@ -30,10 +30,9 @@ var desamovil = {
         desamovil.pageShow('#main')
     },
     scan : function(target) {
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-        scanner.scan(function(result) {
-            alert(result.text);
-                    //    $(target).val(result.text);
+        //var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        window.plugins.barcodeScanner.scan(function(result) {
+            $(target).val(result.text);
         },function () {
             
         });
