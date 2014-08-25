@@ -54,6 +54,7 @@ var desamovil = {
         });
     },
     pageShow:function (page) {
+        $(".page").hide();
         $(page).show();
         $(page).animate({"margin-left": -window.innerWidth});
     },
