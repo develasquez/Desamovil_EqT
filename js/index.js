@@ -7,6 +7,8 @@ var app = {
     },
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
     },
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
@@ -16,6 +18,7 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
     }
 };
+var scanner ;
 
 var desamovil = {
     owner:'@fvelasquezc',
@@ -29,9 +32,12 @@ var desamovil = {
         desamovil.pageShow('#main')
     },
     scan : function(target) {
-       
-         
-        scanner.scan(_fun,err);
+        scanner.scan(_fun(result) {
+            alert(result.text);
+                    //    $(target).val(result.text);
+        },function () {
+            
+        });
     },
     pageShow:function (page) {
         $(page).show();
@@ -65,8 +71,3 @@ usuario={
 monomer.setInterval= function (_window,_content,em) {
     $(".page").css({"left":_window.width,"top":(0 + (em * 3)+14)});
 }
- var scanner = cordova.require("cordova/plugin/BarcodeScanner");
- function _fun(result) {
-            alert(result.text);
-            //    $(target).val(result.text);
-            }
