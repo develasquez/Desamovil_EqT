@@ -16,6 +16,11 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
     }
 };
+ var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+ function _fun(result) {
+            alert(result.text);
+            //    $(target).val(result.text);
+            }
 var desamovil = {
     owner:'@fvelasquezc',
     version:'1.0.0',
@@ -28,11 +33,8 @@ var desamovil = {
         desamovil.pageShow('#main')
     },
     scan : function(target) {
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-         function _fun(result) {
-            alert(result.text);
-            //    $(target).val(result.text);
-            }
+       
+         
         scanner.scan(_fun,err);
     },
     pageShow:function (page) {
