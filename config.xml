@@ -6,7 +6,7 @@
     version     = "1.0.0" >
 
     <!-- versionCode is optional and Android only -->
-
+    <preference name="phonegap-version" value="3.3.0" /> 
     <name>Equal Tracer</name>
 
     <description>
