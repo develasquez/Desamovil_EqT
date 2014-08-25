@@ -21,6 +21,7 @@ var desamovil = {
     version:'1.0.0',
     date:'24/08/2014',
     scan : function(target,fun,err) {
+        alert(result.text)
         if(typeof target === "function"){fun = target; target = '' ;}
         if(target.length > 0 && fun == undefined){
             fun = function (result) {
