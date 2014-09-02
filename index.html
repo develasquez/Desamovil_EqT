@@ -100,6 +100,20 @@
             </ul>
         </nav>
         <div id="pages">
+            <div id="login" class="page">
+                <div class="aspect_16_9 teal"> 
+                    <center>
+                        <img src="img/user.png" class="usuario"> 
+                    </center>
+                </div>
+                <div class="grey">
+                    <h3 class="color-white">Iniciar Sesion</h3>
+                </div>
+                <input type="text" id="txtUsuario" placeholder="Nombre de Usuario" color="blue" >
+                <input type="password" id="txtPassword" placeholder="Password" color="blue">
+                <button class="raised-button blue z-d1 icon-white" onClick="desamovil.login()">Iniciar Sesión</button>
+                
+            </div>
             <div id="crearUsuario" class="page">
                 <div class="aspect_16_9 indigo"> 
                     <center>
@@ -110,18 +124,18 @@
                     <h3 class="color-white">Crear Nuevo Usuario</h3>
                 </div>
                 
-                <input type="text" id="txtUsuario" placeholder="Nombre de Usuario" color="blue">  
-                <input type="text" id="txtPassword" placeholder="Password" color="blue">
-                <button class="raised-button blue z-d1 icon-white" onClick="">Crear Usuario</button>
+                <input type="text" id="txtNuevoUsuario" placeholder="Nombre de Usuario" color="blue">  
+                <input type="password" id="txtNuevoPassword" placeholder="Password" color="blue">
+                <button class="raised-button blue z-d1 icon-white" onClick="desamovil.nuevoUsuario()">Crear Usuario</button>
                 <button class="raised-button grey z-d1 icon-white" onClick="desamovil.pageClose('#crearUsuario')">Cancelar</button>
             </div>
             <div id="main" class="page">
                  <div class="results aspect_16_9 grey">
                     <div class="correct green">
-                        0
+                        <h1 class="valor">0</h1>
                     </div>
                     <div class="errors red">
-                        0
+                        <h1 class="valor">0</h1>
                     </div>
                 </div>
                  <input type="text" id="txtResultado1" placeholder="Resultado 1" color="blue"> 
@@ -165,12 +179,9 @@
                     </button>
                 </center>
             </div>
-            <div id="crearUsuario" class="page">
-            </div>
+
 
         </div>
-
-        <button class="raised-button blue z-d1 icon-white" onClick="desamovil.pageShow('#crearUsuario')">Nuevo Usuario</button>
     </div>
 </body>
 </html>

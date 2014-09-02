@@ -17,6 +17,8 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
     }
 };
+
+var db = null;
 $(function(){
     db = window.openDatabase("EqualTracer", "1.0", "EqualTracer", 20971520);
     db.transaction(function(tx){
@@ -25,7 +27,31 @@ $(function(){
     }, function(err){}, function(tx,results){
 
     }) 
-                
+    desamovil.pageShow("#main");
+
+    //1 Leer existencia de Usuarios. 
+    usuario.getUsers(function (tx,results) {
+        for (i=0;i<results.rows.length ;i++){
+            var row = results.rows.item(i);
+            if(row.Cant == 0 ){
+                alert("Debe crear un usuario");
+                desamovil.pageShow("#crearUsuario");
+            }else{
+                $(".header").css("pointer-events","none");
+                desamovil.pageShow("#login");
+
+            }
+        }
+    })
+
+    //2 Crear Usuario si no existe.
+    //3 Solicitar Login.
+
+    //Listar Formatos Existes
+    //
+
+
+
 });
 
 
@@ -40,9 +66,35 @@ var desamovil = {
     newScanSeries:function () {
         $("#txtResultado1").val("");
         $("#txtResultado2").val("");
-        $(".correct").text("0");
-        $(".errors").text("0");
+        $(".correct h1").text("0");
+        $(".errors h1").text("0");
         desamovil.pageShow('#main')
+    },
+    nuevoUsuario:function () {
+        debugger;
+        usuario.setUser({
+            nombre:$("#txtNuevoUsuario").val(),
+            password:$("#txtNuevoPassword").val()
+        },function (tx,result) {
+            alert("Usuario creado con exito");
+            desamovil.pageShow("#login");
+        })
+    },
+    login:function(){
+        usuario.findUser(   $("#txtUsuario").val(),
+                            $("#txtPassword").val()
+                            ,function (tx,results) {
+                                for (i=0;i<results.rows.length ;i++){
+                                    var row = results.rows.item(i);
+                                    if(row.Cant > 0 ){
+                                        $(".header").css("pointer-events","auto");
+                                        desamovil.pageShow("#main");
+                                    }else if(row.Cant == 0){
+                                        alert("Usuario o Contraseña Incorrecto");
+                                    }
+                                }
+                            }
+                        )
     },
     scan : function(target,_fun) {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
@@ -69,15 +121,32 @@ var desamovil = {
 
 usuario={
     getUsers:function (fun) {
-        
+        db.transaction(function(tx){
+            tx.executeSql('SELECT count(1) as Cant FROM Usuarios', [], function(tx, results) { 
+                fun(tx,results)
+            });
+        }) 
     },
-    setUser:function(fun){
-
+    setUser:function(user,fun){
+        db.transaction(function(tx){
+            tx.executeSql('INSERT into Usuarios (fullNombre, userName, password, lastLogin) values (?,?,?,?)', [user.nombre,user.nombre,user.password,new Date()], function(tx, results) { 
+                fun(tx,results)
+            });
+        }) 
     },
     findUser:function (p_user,p_password,fun) {
-
+        db.transaction(function(tx){
+            tx.executeSql('SELECT count(1) as Cant FROM Usuarios where userName = ? and password = ?', [p_user,p_password], function(tx, results) { 
+                fun(tx,results)
+            });
+        }) 
     },
     deleteUser:function(p_user,fun){
+      db.transaction(function(tx){
+            tx.executeSql('DELTE FROM Usuarios where userName = ?', [p_user], function(tx, results) { 
+                fun(tx,results)
+            });
+        })
 
     }
 }

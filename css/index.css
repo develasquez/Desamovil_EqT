@@ -27,10 +27,8 @@
 }
 
 .correct h1,.errors h1{
-    position: absolute;
     height: 100px;
     width: 100px;
-    margin: 0px;
     display: -moz-inline-stack;
     display: inline-block;
     *display: inline;

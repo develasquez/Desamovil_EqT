@@ -94,8 +94,8 @@ border: none;
     height: 0px;
     width: 0px;
     border-radius: 50%;
-    transition: border .3s, top .3s, left .3s, visibility .3s;
-    -webkit-transition: border .3s, top .3s, left .3s visibility .3s;
+    transition: border .264s, top .264s, left .264s, visibility .264s;
+    -webkit-transition: border .264s, top .264s, left .264s visibility .264s;
     opacity: .5;
     z-index:10000;
 }
@@ -585,8 +585,8 @@ border: none;
 }
 
 .aspect_16_9, .aspect_2_3, .aspect_4_3, .aspect_1_1{
-    transition: width .3s, height .3s;
-    -webkit-transition: width .3s, height .3s ;
+    transition: width .264s, height .264s;
+    -webkit-transition: width .264s, height .264s ;
 }
 
 
@@ -654,7 +654,7 @@ input[type="checkbox"]:not(.toggle):checked:before{
     animation: spinUp .5s  linear;
 }
 
-input[type="text"]{
+input[type="text"],input[type="password"],input[type="number"],input[type="datetime"]{
     background-color: rgba(0,0,0,0);
     border:     0px;
     padding:    1em;
@@ -670,6 +670,8 @@ input[type="text"]{
     -webkit-transition: width .5s; /* Safari */
 
 }
+
+
 
 .text_after_focused{
     border:solid 2px #000;
@@ -751,10 +753,10 @@ input[type="radio"]:before{
     -moz-osx-font-smoothing: grayscale;
     font-size:170%;
     z-index: 0;
-     -webkit-animation: contract .3s  linear;
-    -moz-animation: contract .3s  linear;
-    -o-animation: contract .3s  linear;
-    animation: contract .3s  linear;
+     -webkit-animation: contract .264s  linear;
+    -moz-animation: contract .264s  linear;
+    -o-animation: contract .264s  linear;
+    animation: contract .264s  linear;
 }
 input[type="radio"]:checked:before{
     content: "\f111";
@@ -770,10 +772,10 @@ input[type="radio"]:checked:before{
     -moz-osx-font-smoothing: grayscale;
     font-size:170%;
     z-index: 0;
-    -webkit-animation: expand .3s  linear;
-    -moz-animation: expand .3s  linear;
-    -o-animation: expand .3s  linear;
-    animation: expand .3s  linear;
+    -webkit-animation: expand .264s  linear;
+    -moz-animation: expand .264s  linear;
+    -o-animation: expand .264s  linear;
+    animation: expand .264s  linear;
 }
 
 
@@ -792,8 +794,8 @@ input[type="radio"]:checked:before{
     display: inline-block;
     width: 280px;
     height:100%;
-    transition: margin-left .3s;
-    -webkit-transition: margin-left .3s; /* Safari */
+    transition: margin-left .264s;
+    -webkit-transition: margin-left .264s; /* Safari */
     z-index: 5000;
 }
 .leftMenu ul, .rightMenu ul{
@@ -806,8 +808,8 @@ input[type="radio"]:checked:before{
     display: none;
     width: 280px;
     height:100%;
-    transition: margin-left .3s;
-    -webkit-transition: margin-left .3s; /* Safari */
+    transition: margin-left .264s;
+    -webkit-transition: margin-left .264s; /* Safari */
     z-index: 5000;
 }
 .rightMenu-expanded{

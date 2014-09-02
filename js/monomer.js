@@ -118,7 +118,9 @@
 	            	height :window.innerHeight - (em * 3) -20
 	        	}
 	            $("body").width(_window.width).height(_window.height);
-				$(".content").height(_content.width)
+				$(".content").height(_content.height)
+
+				$(".page").css({"margin-left": -_window.width, width:_window.width});
 
 	        }
 	        monomer.setInterval(_window,_content,em)
@@ -143,12 +145,12 @@
 	    		}
 	    }) 
 		monomer.__setAspect();
-
-		$('input[type="text"]').after($("<hr>").addClass("text_after"))
-		$('input[type="text"]').on("focus",function () {
+		var __textInput = $('input[type="text"],input[type="password"],input[type="number"],input[type="datetime"]');
+		__textInput.after($("<hr>").addClass("text_after"))
+		__textInput.on("focus",function () {
 			$(this).next().addClass($(this).attr("color"));
 		});
-		$('input[type="text"]').on("blur",function () {
+		__textInput.on("blur",function () {
 			$(this).next().removeClass($(this).attr("color"));
 		});
 		$('input[type="checkbox"]').each(function (i,chkBox) {
