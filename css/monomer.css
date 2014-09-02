@@ -615,7 +615,11 @@ input[type="checkbox"]:not(.toggle):before{
     background: #fff;
     margin-top: -5px;
     margin-left: -5px;
+     display: -moz-inline-stack;
     display: inline-block;
+    *display: inline;
+
+    zoom: 1;
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
@@ -638,7 +642,11 @@ input[type="checkbox"]:not(.toggle):checked:before{
     content: "\f00c";
     margin-top: -5px;
     margin-left: -5px;
+    display: -moz-inline-stack;
     display: inline-block;
+    *display: inline;
+
+    zoom: 1;
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
@@ -670,7 +678,6 @@ input[type="text"],input[type="password"],input[type="number"],input[type="datet
     -webkit-transition: width .5s; /* Safari */
 
 }
-
 
 
 .text_after_focused{

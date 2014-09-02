@@ -37,7 +37,7 @@ $(function(){
                 alert("Debe crear un usuario");
                 desamovil.pageShow("#crearUsuario");
             }else{
-                $(".header").css("pointer-events","none");
+                $(".header").hide();
                 desamovil.pageShow("#login");
 
             }
@@ -87,7 +87,7 @@ var desamovil = {
                                 for (i=0;i<results.rows.length ;i++){
                                     var row = results.rows.item(i);
                                     if(row.Cant > 0 ){
-                                        $(".header").css("pointer-events","auto");
+                                        $(".header").show();
                                         desamovil.pageShow("#main");
                                     }else if(row.Cant == 0){
                                         alert("Usuario o Contraseña Incorrecto");
@@ -104,6 +104,10 @@ var desamovil = {
         },function () {
             
         });
+    },
+    clean: function (element) {
+      $(element).val("");
+      $(element).focus();
     },
     pageShow:function (page) {
         $(".page").hide();

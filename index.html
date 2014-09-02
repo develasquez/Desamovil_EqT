@@ -100,6 +100,10 @@
             </ul>
         </nav>
         <div id="pages">
+            
+
+<!--login-->
+
             <div id="login" class="page">
                 <div class="aspect_16_9 teal"> 
                     <center>
@@ -114,6 +118,10 @@
                 <button class="raised-button blue z-d1 icon-white" onClick="desamovil.login()">Iniciar Sesión</button>
                 
             </div>
+            
+
+<!--crearUsuario-->
+
             <div id="crearUsuario" class="page">
                 <div class="aspect_16_9 indigo"> 
                     <center>
@@ -129,6 +137,10 @@
                 <button class="raised-button blue z-d1 icon-white" onClick="desamovil.nuevoUsuario()">Crear Usuario</button>
                 <button class="raised-button grey z-d1 icon-white" onClick="desamovil.pageClose('#crearUsuario')">Cancelar</button>
             </div>
+            
+
+<!--main-->
+
             <div id="main" class="page">
                  <div class="results aspect_16_9 grey">
                     <div class="correct green">
@@ -138,13 +150,33 @@
                         <h1 class="valor">0</h1>
                     </div>
                 </div>
-                 <input type="text" id="txtResultado1" placeholder="Resultado 1" color="blue"> 
-                 <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado1')"><i class="icon-qrcode color-white"></i></button> 
-                <input type="text" id="txtResultado2" placeholder="Resultado 2" color="blue">
-                <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado2')">
-                    <i class="icon-qrcode color-white"></i>
-                </button>
+                 <div class="escaneoInput">
+                    <input type="text" id="txtResultado1" placeholder="Resultado 1" color="blue"> </div>
+                 <div class="escaneoBtn">
+                    <button class="raised-button grey z-d1 icon-white" onClick="desamovil.clean('#txtResultado1')">
+                        <i class="icon-times color-white"></i>
+                    </button> 
+                    <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado1')">
+                        <i class="icon-qrcode color-white"></i>
+                    </button> 
+                </div>
+                <br>
+                <br>
+                 <div class="escaneoInput">
+                    <input type="text" id="txtResultado2" placeholder="Resultado 2" color="blue"></div>
+                 <div class="escaneoBtn"> 
+                    <button class="raised-button grey z-d1 icon-white" onClick="desamovil.clean('#txtResultado2')">
+                        <i class="icon-times color-white"></i>
+                    </button> 
+                    <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado2')">
+                        <i class="icon-qrcode color-white"></i>
+                    </button>
+                </div>
             </div>
+            
+
+<!--nuevoFormato-->
+
             <div id="nuevoFormato" class="page">
                 <div class="aspect_16_9 black"> 
                         <img src="img/DataMatrix.jpg" class="datamatrixImg"> 

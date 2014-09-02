@@ -2,6 +2,7 @@
     padding: 0px;
     color: #fff;
     font-size: 850%;
+    margin-bottom: 50px;
 }
 .correct{
     display: -moz-inline-stack;
@@ -75,3 +76,29 @@
 #titleNewFormat .floating-button{
     margin:0px 0px 0px 3em;
 }
+
+.escaneoInput{
+    display: inline-block;
+    width:69% ;
+
+}
+
+.escaneoInput input{
+    width: 100%;
+}
+.escaneoInput hr{
+    width: 100%;
+}
+.escaneoBtn{
+    display: inline-block;
+    width:30%;
+}
+
+.escaneoBtn button{
+    display: -moz-inline-stack;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    margin: 0em;
+}
+
