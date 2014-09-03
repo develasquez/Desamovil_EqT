@@ -3,7 +3,7 @@ var app = {
         this.bindEvents();
     },
     bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.ºEventListener('deviceready', this.onDeviceReady, false);
     },
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
@@ -164,10 +164,9 @@ formatos={
         desamovil.scan("#txtNewFormat",function(result){
 
             $("#h3ForatCreator").html("");
-            textLenght = result.text.length;
             for (var i = 0; i < result.text.length; i++) {
                 var newChar = result.text.substring(i,i+1);
-                $("#h3ForatCreator").append($("<i>").text(newChar).addclass("char"));
+                $("#h3ForatCreator").append($("<i>").text(newChar).addClass("char"));
                 //
             };
 
@@ -184,8 +183,8 @@ formatos={
         if(formatos.currentCharIndex < formatos.charCount){
             formatos.currentCharIndex++;
             formatos.currentChar = formatos.textScanned.substring(formatos.currentCharIndex,formatos.currentCharIndex +1);
-            $(".char").removeclass("charSelected");
-            $($(".char")[formatos.currentCharIndex]).addclass("charSelected");
+            $(".char").removeClass("charSelected");
+            $($(".char")[formatos.currentCharIndex]).addClass("charSelected");
         }
     },
     prevChar:function(type){
@@ -193,8 +192,8 @@ formatos={
         if(formatos.currentCharIndex > 0){
             formatos.currentCharIndex--;
             formatos.currentChar = formatos.textScanned.substring(formatos.currentCharIndex,formatos.currentCharIndex + 1);
-            $(".char").removeclass("charSelected");
-            $($(".char")[formatos.currentCharIndex]).addclass("charSelected");
+            $(".char").removeClass("charSelected");
+            $($(".char")[formatos.currentCharIndex]).addClass("charSelected");
         } 
     }
 
