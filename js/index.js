@@ -195,6 +195,15 @@ formatos={
             $(".char").removeClass("charSelected");
             $($(".char")[formatos.currentCharIndex]).addClass("charSelected");
         } 
+    },
+    ignoreChar:function(){
+        $($(".char")[formatos.currentCharIndex]).addClass("grey");
+    },
+    exactChar:function(){
+        $($(".char")[formatos.currentCharIndex]).addClass("red");
+    },
+    variableChar:function () {
+        $($(".char")[formatos.currentCharIndex]).addClass("green");
     }
 
 }
