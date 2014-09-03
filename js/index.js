@@ -165,8 +165,9 @@ formatos={
 
             $("#h3ForatCreator").html("");
             for (var i = 0; i < result.text.length; i++) {
-                var newChar = result.text.substring(i,1);
+                var newChar = result.text.substring(i,i+1);
                 $("#h3ForatCreator").append($("<i>").text(newChar));
+                //
             };
 
             formatos.textScanned = result.text;
