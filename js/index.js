@@ -44,13 +44,6 @@ $(function(){
         }
     })
 
-    //2 Crear Usuario si no existe.
-    //3 Solicitar Login.
-
-    //Listar Formatos Existes
-    //
-
-
 
 });
 
@@ -71,7 +64,6 @@ var desamovil = {
         desamovil.pageShow('#main')
     },
     nuevoUsuario:function () {
-        debugger;
         usuario.setUser({
             nombre:$("#txtNuevoUsuario").val(),
             password:$("#txtNuevoPassword").val()
@@ -170,6 +162,13 @@ formatos={
     addFormat:function(){
         desamovil.pageShow('#nuevoFormato')
         desamovil.scan("#txtNewFormat",function(result){
+
+            $("#h3ForatCreator").html("");
+            for (var i = 0; i < result.text.length; i++) {
+                var newChar = result.text.substring(i,1);
+                $("#h3ForatCreator").append($("<i>").text(newChar));
+            };
+
             formatos.textScanned = result.text;
             $("#lblForatCreator").text(formatos.textScanned);
             formatos.charCount = formatos.textScanned.length;
