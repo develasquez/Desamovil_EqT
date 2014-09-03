@@ -164,9 +164,10 @@ formatos={
         desamovil.scan("#txtNewFormat",function(result){
 
             $("#h3ForatCreator").html("");
+            textLenght = result.text.length;
             for (var i = 0; i < result.text.length; i++) {
                 var newChar = result.text.substring(i,i+1);
-                $("#h3ForatCreator").append($("<i>").text(newChar));
+                $("#h3ForatCreator").append($("<i>").text(newChar).addclass("char"));
                 //
             };
 
@@ -178,9 +179,23 @@ formatos={
     setComparationType:function(type){
         formatos.comparationTypeSelected = type;
     },
-    nexChar:function(type){
-        formatos.currentChar = formatos.textScanned.subString(formatos.currentCharIndex,1);
-        formatos.currentCharIndex++;
+    nextChar:function(type){
+        debugger;
+        if(formatos.currentCharIndex < formatos.charCount){
+            formatos.currentCharIndex++;
+            formatos.currentChar = formatos.textScanned.substring(formatos.currentCharIndex,formatos.currentCharIndex +1);
+            $(".char").removeclass("charSelected");
+            $($(".char")[formatos.currentCharIndex]).addclass("charSelected");
+        }
+    },
+    prevChar:function(type){
+        debugger;
+        if(formatos.currentCharIndex > 0){
+            formatos.currentCharIndex--;
+            formatos.currentChar = formatos.textScanned.substring(formatos.currentCharIndex,formatos.currentCharIndex + 1);
+            $(".char").removeclass("charSelected");
+            $($(".char")[formatos.currentCharIndex]).addclass("charSelected");
+        } 
     }
 
 }
