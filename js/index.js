@@ -44,6 +44,25 @@ $(function(){
         }
     })
 
+    $("#btnPrev").on("touchend",function(){
+        formatos.prevChar()
+    })
+    $("#btnNext").on("touchend",function(){
+        formatos.nextChar()
+    })
+
+    $("#btnIgnorear").on("touchend",function(){
+        formatos.ignoreChar()
+    })
+    $("#btnExacto").on("touchend",function(){
+        formatos.exactChar()
+    })
+    $("#btnVariable").on("touchend",function(){
+        formatos.variableChar()
+    })
+    $("#btnSeparador").on("touchend",function(){
+        formatos.dividerChar()
+    })
 
 });
 
