@@ -38,7 +38,7 @@ $(function(){
                 desamovil.pageShow("#crearUsuario");
             }else{
                 $(".header").hide();
-                desamovil.pageShow("#login");
+                desamovil.pageShow("#nuevoFormato"); //login
 
             }
         }
@@ -150,7 +150,10 @@ comparationType ={
     EXCACT:0,
     IGNORE:1,
     VARIABLE:2,
+    DIVIDER:3
 };
+
+
 
 
 formatos={
@@ -195,13 +198,32 @@ formatos={
         } 
     },
     ignoreChar:function(){
-        $($(".char")[formatos.currentCharIndex]).addClass("color-grey");
+        var charElement = $($(".char")[formatos.currentCharIndex])
+            charElement.removeClass("color-red")
+                       .removeClass("color-green")
+                       .removeClass("color-indigo")
+                       .addClass("color-grey");
     },
     exactChar:function(){
-        $($(".char")[formatos.currentCharIndex]).addClass("color-red");
+         var charElement = $($(".char")[formatos.currentCharIndex])
+            charElement.removeClass("color-grey")
+                       .removeClass("color-green")
+                       .removeClass("color-indigo")
+                       .addClass("color-red");
     },
     variableChar:function () {
-        $($(".char")[formatos.currentCharIndex]).addClass("color-green");
+         var charElement = $($(".char")[formatos.currentCharIndex])
+            charElement.removeClass("color-red")
+                       .removeClass("color-grey")
+                       .removeClass("color-indigo")
+                       .addClass("color-green");
+    },
+    dividerChar:function () {
+         var charElement = $($(".char")[formatos.currentCharIndex])
+            charElement.removeClass("color-red")
+                       .removeClass("color-grey")
+                       .removeClass("color-green")
+                       .addClass("color-indigo");
     }
 
 }

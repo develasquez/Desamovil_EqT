@@ -170,6 +170,10 @@ border: none;
     width:98% ;
 }
 
+
+
+
+
 .card .header {
     height:auto !important;
 
@@ -1061,16 +1065,19 @@ input[type="radio"]:checked:before{
   font-weight: normal;
   font-style: normal;
 }
-.icon-2x {
+.em1, .icon-1x{
+  font-size: 1em;  
+}
+.em2, .icon-2x {
   font-size: 2em;
 }
-.icon-3x {
+.em3, .icon-3x {
   font-size: 3em;
 }
-.icon-4x {
+.em4, .icon-4x {
   font-size: 4em;
 }
-.icon-5x {
+.em5, .icon-5x {
   font-size: 5em;
 }
 .icon-spin {
@@ -1358,14 +1365,14 @@ input[type="radio"]:checked:before{
 
 .icon-glass:before {
   content: "\f000";
-    display: inline-block;
+  display: inline-block;
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size:130%;
+  font-size:1em;
 }
 .icon-music:before {
   content: "\f001";
