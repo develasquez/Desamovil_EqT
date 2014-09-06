@@ -155,10 +155,10 @@ comparationType ={
 
 formatos={
     currentCharIndex:0,
-    currentChar:'',
-    charCount:0,
+    currentChar:'F',
+    charCount:6,
     comparationTypeSelected:comparationType.EXCACT,
-    textScanned:'',
+    textScanned:'Felipe',
     addFormat:function(){
         desamovil.pageShow('#nuevoFormato')
         desamovil.scan("#txtNewFormat",function(result){
@@ -167,9 +167,9 @@ formatos={
             for (var i = 0; i < result.text.length; i++) {
                 var newChar = result.text.substring(i,i+1);
                 $("#h3ForatCreator").append($("<i>").text(newChar).addClass("char"));
-                //
             };
-
+            $($(".char")[0]).addClass("charSelected");
+            formatos.currentChar = $($(".char")[0]).text();
             formatos.textScanned = result.text;
             $("#lblForatCreator").text(formatos.textScanned);
             formatos.charCount = formatos.textScanned.length;
@@ -179,7 +179,6 @@ formatos={
         formatos.comparationTypeSelected = type;
     },
     nextChar:function(type){
-        debugger;
         if(formatos.currentCharIndex < formatos.charCount){
             formatos.currentCharIndex++;
             formatos.currentChar = formatos.textScanned.substring(formatos.currentCharIndex,formatos.currentCharIndex +1);
@@ -188,7 +187,6 @@ formatos={
         }
     },
     prevChar:function(type){
-        debugger;
         if(formatos.currentCharIndex > 0){
             formatos.currentCharIndex--;
             formatos.currentChar = formatos.textScanned.substring(formatos.currentCharIndex,formatos.currentCharIndex + 1);
@@ -197,13 +195,13 @@ formatos={
         } 
     },
     ignoreChar:function(){
-        $($(".char")[formatos.currentCharIndex]).addClass("grey");
+        $($(".char")[formatos.currentCharIndex]).addClass("color-grey");
     },
     exactChar:function(){
-        $($(".char")[formatos.currentCharIndex]).addClass("red");
+        $($(".char")[formatos.currentCharIndex]).addClass("color-red");
     },
     variableChar:function () {
-        $($(".char")[formatos.currentCharIndex]).addClass("green");
+        $($(".char")[formatos.currentCharIndex]).addClass("color-green");
     }
 
 }
