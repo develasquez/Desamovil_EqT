@@ -38,7 +38,7 @@ $(function(){
                 desamovil.pageShow("#crearUsuario");
             }else{
                 $(".header").hide();
-                desamovil.pageShow("#nuevoFormato"); //login
+                desamovil.pageShow("#login"); //nuevoFormato
 
             }
         }
@@ -166,8 +166,8 @@ usuario={
     }
 }
 comparationType ={
-    EXCACT:0,
-    IGNORE:1,
+    IGNORE:0,
+    EXCACT:1,
     VARIABLE:2,
     DIVIDER:3
 };
@@ -177,10 +177,16 @@ comparationType ={
 
 formatos={
     currentCharIndex:0,
-    currentChar:'F',
+    currentChar:'',
     charCount:6,
     comparationTypeSelected:comparationType.EXCACT,
-    textScanned:'Felipe',
+    textScanned:'',
+    configuration: {
+        length:6,
+        caracters:[],
+        config:[],
+        divider:''
+    },
     addFormat:function(){
         desamovil.pageShow('#nuevoFormato')
         desamovil.scan("#txtNewFormat",function(result){
@@ -189,6 +195,9 @@ formatos={
             for (var i = 0; i < result.text.length; i++) {
                 var newChar = result.text.substring(i,i+1);
                 $("#h3ForatCreator").append($("<i>").text(newChar).addClass("char"));
+                ln = formatos.configuration.caracters.length;
+                formatos.configuration.caracters[ln] = newChar;
+                formatos.configuration.config[ln] = 0;
             };
             $($(".char")[0]).addClass("charSelected");
             formatos.currentChar = $($(".char")[0]).text();
@@ -200,7 +209,7 @@ formatos={
     setComparationType:function(type){
         formatos.comparationTypeSelected = type;
     },
-    nextChar:function(type){
+    nextChar:function(){
         if(formatos.currentCharIndex < formatos.charCount){
             formatos.currentCharIndex++;
             formatos.currentChar = formatos.textScanned.substring(formatos.currentCharIndex,formatos.currentCharIndex +1);
@@ -208,7 +217,7 @@ formatos={
             $($(".char")[formatos.currentCharIndex]).addClass("charSelected");
         }
     },
-    prevChar:function(type){
+    prevChar:function(){
         if(formatos.currentCharIndex > 0){
             formatos.currentCharIndex--;
             formatos.currentChar = formatos.textScanned.substring(formatos.currentCharIndex,formatos.currentCharIndex + 1);
@@ -222,6 +231,9 @@ formatos={
                        .removeClass("color-green")
                        .removeClass("color-indigo")
                        .addClass("color-grey");
+        
+        formatos.configuration.config[formatos.currentCharIndex] = comparationType.IGNORE;
+        formatos.nextChar();
     },
     exactChar:function(){
          var charElement = $($(".char")[formatos.currentCharIndex])
@@ -229,6 +241,9 @@ formatos={
                        .removeClass("color-green")
                        .removeClass("color-indigo")
                        .addClass("color-red");
+            
+            formatos.configuration.config[formatos.currentCharIndex] = comparationType.EXCACT;
+            formatos.nextChar();
     },
     variableChar:function () {
          var charElement = $($(".char")[formatos.currentCharIndex])
@@ -236,6 +251,9 @@ formatos={
                        .removeClass("color-grey")
                        .removeClass("color-indigo")
                        .addClass("color-green");
+        
+            formatos.configuration.config[formatos.currentCharIndex] = comparationType.VARIABLE;
+            formatos.nextChar();
     },
     dividerChar:function () {
          var charElement = $($(".char")[formatos.currentCharIndex])
@@ -243,9 +261,14 @@ formatos={
                        .removeClass("color-grey")
                        .removeClass("color-green")
                        .addClass("color-indigo");
+        
+            formatos.configuration.config[formatos.currentCharIndex] = comparationType.DIVIDER;
+            formatos.nextChar();
     }
 
 }
+
+
 
 monomer.setInterval= function (_window,_content,em) {
     $(".page").css({"left":_window.width,"top":(0 + (em * 3)+14)});
