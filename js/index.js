@@ -274,7 +274,7 @@ var formatos={
                     $(".liFormato").on("touchend",function(){
                         var row = JSON.parse($(this).data("data"));
                         formatos.configuration = JSON.parse(row.configJSON);
-                        formatos.setFormat(formatos.configuration.text);
+                        formatos.setFormat(formatos.configuration);
                     })
                 });
             }) 
