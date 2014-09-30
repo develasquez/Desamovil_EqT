@@ -72,7 +72,7 @@ $(function(){
     })
 
     //Datos de Prueba 
-    formatos.displayFormat({text:"SA-161358533-4748"})
+    //formatos.displayFormat({text:"SA-161358533-4748"})
     //Datos de Prueba 
 
 
@@ -211,6 +211,19 @@ var formatos={
             target = "#h3ForatCreator";
         }
         $(target).html("");
+        currentCharIndex:0;
+        currentChar:'';
+        charCount:0;
+        comparationTypeSelected:comparationType.EXCACT;
+        textScanned:'';
+        name:'';
+        formatos.configuration: {
+            text:'',
+            length:0,
+            caracters:[],
+            config:[],
+            divider:''
+        }
         for (var i = 0; i < result.text.length; i++) {
             var newChar = result.text.substring(i,i+1);
             $(target).append($("<i>").text(newChar).addClass("char"));
@@ -261,7 +274,7 @@ var formatos={
                     $(".liFormato").on("touchend",function(){
                         var row = JSON.parse($(this).data("data"));
                         formatos.configuration = JSON.parse(row.configJSON);
-                        formatos.setFormat(r);
+                        formatos.setFormat(formatos.configuration.text);
                     })
                 });
             }) 
