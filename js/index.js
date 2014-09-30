@@ -211,13 +211,13 @@ var formatos={
             target = "#h3ForatCreator";
         }
         $(target).html("");
-        currentCharIndex:0;
-        currentChar:'';
-        charCount:0;
-        comparationTypeSelected:comparationType.EXCACT;
-        textScanned:'';
-        name:'';
-        formatos.configuration: {
+        currentCharIndex=0;
+        currentChar='';
+        charCount=0;
+        comparationTypeSelected=comparationType.EXCACT;
+        textScanned='';
+        name='';
+        formatos.configuration= {
             text:'',
             length:0,
             caracters:[],
