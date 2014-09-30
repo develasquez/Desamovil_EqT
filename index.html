@@ -10,7 +10,7 @@
                                   maximum-scale=1" />
 
     <link rel="stylesheet" href="css/monomer.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css"> 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="cordova_plugins.js"></script>
     <script type="text/javascript" src="barcodescanner.js"></script>
@@ -25,12 +25,6 @@
         <h3 class="color-white">
             Equal Tracer
         </h3>
-        <button class="expand-config button-right icon-ellipsis-v icon-white icon-1x"></button> 
-         <ul class="configMenu background_control z-d1">
-            <a href="#"><li>Login Usuario</li></a>
-            <a href="#"><li>Log Historico</li></a>
-            <a href="#"><li>Configuración</li></a>
-         </ul>
     </header>
     <div class="content ">
         <nav class="leftMenu z-d1">
@@ -71,32 +65,50 @@
                         
                     </li>
                 </a>
+                <a href="#" onClick="desamovil.pageShow('#crearUsuario');">
+                    <li>
+                        <div>
+                            <div class="test_box fab z-d1">
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h3>Usuarios</h3>
+                                <p>Crear Usuario</p>
+                            </div>
+                            <span></span>
+                        </div>
+                        
+                    </li>
+                </a>
+                <a href="#" class="">
+                    <li>
+                        <div>
+                            <div class="test_box fab z-d1">
+                                <i class="icon-history"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h3>Historial</h3>
+                                <p>Log Histórico</p>
+                            </div>
+                            <span></span>
+                        </div>
+                        
+                    </li>
+                </a>
             </ul>
         </nav>
         <nav class="rightMenu z-d1">
-            <ul class="lista background_control z-d1">
+            <ul id="listaFormatos" class="lista background_control z-d1">
                 <li class="lista-bar">
                     <h3>Formatos</h3>
                     <button class="floating-button cyan " onClick="formatos.addFormat()">
                         <i class="icon-plus color-white"></i>
                     </button>
                 </li> 
-                <a href="#">
-                    <li>
-                        <div>
-                            <div class="test_box fab z-d1">
-                                <i class="icon-arrow-left"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <h3>Formato Estandard</h3>
-                                <p>xx-xxxx-xx</p>
-                            </div>
-                        </div>
-                        
-                    </li>
-                </a>
             </ul>
         </nav>
         <div id="pages">
@@ -116,7 +128,6 @@
                 <input type="text" id="txtUsuario" placeholder="Nombre de Usuario" color="blue" >
                 <input type="password" id="txtPassword" placeholder="Password" color="blue">
                 <button class="raised-button blue z-d1 icon-white" onClick="desamovil.login()">Iniciar Sesión</button>
-                
             </div>
             
 
@@ -135,7 +146,7 @@
                 <input type="text" id="txtNuevoUsuario" placeholder="Nombre de Usuario" color="blue">  
                 <input type="password" id="txtNuevoPassword" placeholder="Password" color="blue">
                 <button class="raised-button blue z-d1 icon-white" onClick="desamovil.nuevoUsuario()">Crear Usuario</button>
-                <button class="raised-button grey z-d1 icon-white" onClick="desamovil.pageClose('#crearUsuario')">Cancelar</button>
+                <!-- <button class="raised-button grey z-d1 icon-white" onClick="desamovil.pageClose('#crearUsuario')">Cancelar</button> -->
             </div>
             
 
@@ -149,6 +160,12 @@
                     <div class="errors red">
                         <h1 class="valor">0</h1>
                     </div>
+                 </div>
+              	<div class="formatoSeleccionado">
+                <label class="nombreFormato">Nombre Formato</label>:
+                  <h2 class="estructuraFormato">
+                  	xxx-xxxxx-xxxxxx
+                  </h2>
                 </div>
                  <div class="escaneoInput">
                     <input type="text" id="txtResultado1" placeholder="Resultado 1" color="blue"> </div>
@@ -159,9 +176,9 @@
                     <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado1')">
                         <i class="icon-qrcode color-white"></i>
                     </button> 
-                </div>
-                <br>
-                <br>
+                 </div>
+                 <br>
+                 <br>
                  <div class="escaneoInput">
                     <input type="text" id="txtResultado2" placeholder="Resultado 2" color="blue"></div>
                  <div class="escaneoBtn"> 
@@ -171,7 +188,7 @@
                     <button class="raised-button blue z-d1 icon-white" onClick="desamovil.scan('#txtResultado2')">
                         <i class="icon-qrcode color-white"></i>
                     </button>
-                </div>
+                 </div>
             </div>
             
 
@@ -187,16 +204,10 @@
                         <i class="icon-qrcode color-white"></i>
                     </button>
                 </div>
-                <input type="text" id="txtNewFormat" placeholder="Codigo Ejemplo" color="blue"> 
+                <input type="text" id="txtNewFormat" placeholder="Nombre Nuevo Formato" color="blue"> 
                 
                 <center>
                     <h1 id="h3ForatCreator">
-                    <!--<i class="char charSelected">F</i>
-                        <i class="char">e</i>
-                        <i class="char">l</i>
-                        <i class="char">i</i>
-                        <i class="char">p</i>
-                        <i class="char">e</i> -->
                     </h1>
                     <button id="btnPrev" class="raised-button blue z-d1 icon-white" >
                         <i class="icon-arrow-left color-white"></i>
@@ -206,7 +217,7 @@
                     </button>
                     <br>
                     <button id="btnIgnorear" class="raised-button grey z-d1 icon-white" >
-                        Ignorear
+                        Ignorar
                     </button>
                     <button id="btnExacto" class="raised-button red z-d1 icon-white" >
                         Exacto
@@ -216,6 +227,10 @@
                     </button>
                     <button id="btnSeparador" class="raised-button indigo z-d1 icon-white" >
                         Separador
+                    </button>
+                    <br>
+                    <button id="btnCrearFormato" class="raised-button light-blue z-d3 icon-black" >
+                        <i class="icon-gear"></i> Crear
                     </button>
 
                 </center>

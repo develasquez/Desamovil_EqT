@@ -20,10 +20,10 @@ var app = {
 
 var db = null;
 $(function(){
-    db = window.openDatabase("EqualTracer", "1.0", "EqualTracer", 20971520);
+    db = window.openDatabase("EqualTracer_2", "1.0", "EqualTracer_2", 20971520);
     db.transaction(function(tx){
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Usuarios (id unique, fullNombre, userName, password, lastLogin)');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Formatos (id unique, nombreFormato, estructura)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Usuarios (id INTEGER PRIMARY KEY, fullNombre VARCHAR, userName VARCHAR, password VARCHAR, lastLogin )');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Formatos (id INTEGER PRIMARY KEY, nombre VARCHAR, configJSON VARCHAR)');
     }, function(err){}, function(tx,results){
 
     }) 
@@ -64,6 +64,17 @@ $(function(){
         formatos.dividerChar()
     })
 
+    $("#btnCrearFormato").on("touchend",function(){
+        formatos.saveFormat(function(tx,results){
+            alert("El formato ha sido registrado con éxito");
+        })
+    })
+
+    //Datos de Prueba 
+    formatos.displayFormat({text:"SA-161358533-4748"})
+    //Datos de Prueba 
+
+
 });
 
 
@@ -100,6 +111,7 @@ var desamovil = {
                                     if(row.Cant > 0 ){
                                         $(".header").show();
                                         desamovil.pageShow("#main");
+                                        formatos.loadFormats();
                                     }else if(row.Cant == 0){
                                         alert("Usuario o Contraseña Incorrecto");
                                     }
@@ -165,7 +177,7 @@ usuario={
 
     }
 }
-comparationType ={
+var comparationType ={
     IGNORE:0,
     EXCACT:1,
     VARIABLE:2,
@@ -174,37 +186,80 @@ comparationType ={
 
 
 
-
-formatos={
+var formatos={
     currentCharIndex:0,
     currentChar:'',
-    charCount:6,
+    charCount:0,
     comparationTypeSelected:comparationType.EXCACT,
     textScanned:'',
+    name:'',
     configuration: {
-        length:6,
+        length:0,
         caracters:[],
         config:[],
         divider:''
     },
     addFormat:function(){
         desamovil.pageShow('#nuevoFormato')
-        desamovil.scan("#txtNewFormat",function(result){
+        desamovil.scan("#txtNewFormat",formatos.displayFormat);
+    },
+    displayFormat:function(result,target){
+        if(target == undefined){
+            target = "#h3ForatCreator";
+        }
+        $(target).html("");
+        for (var i = 0; i < result.text.length; i++) {
+            var newChar = result.text.substring(i,i+1);
+            $(target).append($("<i>").text(newChar).addClass("char"));
+            ln = formatos.configuration.caracters.length;
+            formatos.configuration.caracters[ln] = newChar;
+            formatos.configuration.config[ln] = 0;
+        };
+        $($(".char")[0]).addClass("charSelected");
+        formatos.currentChar = $($(".char")[0]).text();
+        formatos.textScanned = result.text;
+        $("#lblForatCreator").text(formatos.textScanned);
+        formatos.charCount = formatos.textScanned.length;
+    },
+  	saveFormat:function(fun){
+        if($("#txtNewFormat").val().length == 0  ){
+            alert("Debe establecer un nombre para el Formato");
+            $("#txtNewFormat").focus();
+        }else{
+    	//gurdar informacion de la configuracion en la bd
+            db.transaction(function(tx){
+                tx.executeSql('insert into Formatos (nombre, configJSON) values (?,?)', [$("#txtNewFormat").val(),JSON.stringify(formatos.configuration) ], function(tx, results) { 
+                    fun(tx,results)
+                });
+            }) 
+        }
+    },
+    setFormat:function(element){
+        //1º Leer BD y formato solicitado.
 
-            $("#h3ForatCreator").html("");
-            for (var i = 0; i < result.text.length; i++) {
-                var newChar = result.text.substring(i,i+1);
-                $("#h3ForatCreator").append($("<i>").text(newChar).addClass("char"));
-                ln = formatos.configuration.caracters.length;
-                formatos.configuration.caracters[ln] = newChar;
-                formatos.configuration.config[ln] = 0;
-            };
-            $($(".char")[0]).addClass("charSelected");
-            formatos.currentChar = $($(".char")[0]).text();
-            formatos.textScanned = result.text;
-            $("#lblForatCreator").text(formatos.textScanned);
-            formatos.charCount = formatos.textScanned.length;
-        });
+        //2º Se establece el valor en pantalla
+        formatos.displayFormat(element,".estructuraFormato");
+        //3º se carga algoritmo de validacion.
+        
+    },
+    loadFormats:function(){
+        db.transaction(function(tx){
+                tx.executeSql('select id, nombre, configJSON  from Formatos ', [], function(tx, results) { 
+                    for (i=0;i<results.rows.length ;i++){
+                        var row = results.rows.item(i);
+                        if(row.Cant == 0 ){
+                            alert("Debe crear un formato de Comparación");
+                            desamovil.pageShow("#nuevoFormato"); 
+                        }else{
+                            $("#listaFormatos").append($(listaItem(row)).data("data",JSON.stringify(row)));
+                        }
+                    }
+                    $(".liFormato").on("touchend",function(){
+                        var row = JSON.parse($(this).data("data"));
+                        formatos.setFormat(row);
+                    })
+                });
+            }) 
     },
     setComparationType:function(type){
         formatos.comparationTypeSelected = type;
@@ -271,5 +326,24 @@ formatos={
 
 
 monomer.setInterval= function (_window,_content,em) {
-    $(".page").css({"left":_window.width,"top":(0 + (em * 3)+14)});
+    //$(".page").css({"left":_window.width,"top":(0 + (em * 3)+14)});
 }
+
+var listaItem = function(element){ 
+                    debugger;
+                    return['<a id="'+element.id+'" href="#" class="liFormato">',
+                            '    <li>',
+                            '        <div>',
+                            '            <div class="test_box fab z-d1">',
+                            '                <i class="icon-arrow-left"></i>',
+                            '            </div>',
+                            '        </div>',
+                            '        <div>',
+                            '            <div>',
+                            '                <h3>'+element.nombre+'</h3>',
+                            '                <p>'+JSON.parse(element.configJSON).textScanned+'</p>',
+                            '            </div>',
+                            '        </div>                ',
+                            '    </li>',
+                            '</a>'].join("\n");
+                }

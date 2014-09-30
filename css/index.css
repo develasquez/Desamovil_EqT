@@ -53,6 +53,12 @@
     -webkit-transition: margin-left .3s; /* Safari */
     height:100%;
     width:100%;
+
+/* prueba orientation */
+
+    left :100%;
+    top  :3.8em;
+
 }
 
 .page h3{
@@ -101,6 +107,12 @@
     zoom: 1;
     margin: 0em;
 }
+
+.formatoSeleccionado{
+    margin-left: 1em;
+
+}
+
 .char{
     display: inline-block;
     font-style: normal;
@@ -126,4 +138,5 @@
         0%  {background-color: white}
         100%{background-color: #03a9f4}   
     }
+
 
