@@ -66,6 +66,7 @@ $(function(){
 
     $("#btnCrearFormato").on("touchend",function(){
         formatos.saveFormat(function(tx,results){
+            formatos.loadFormats();
             alert("El formato ha sido registrado con éxito");
         })
     })
@@ -123,6 +124,7 @@ var desamovil = {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function(result) {
             $(target).val(result.text);
+            formatos.configuration.text = result.text;
             _fun(result);
         },function () {
             
@@ -194,6 +196,7 @@ var formatos={
     textScanned:'',
     name:'',
     configuration: {
+        text:'',
         length:0,
         caracters:[],
         config:[],
@@ -243,6 +246,7 @@ var formatos={
         
     },
     loadFormats:function(){
+        $("#listaFormatos a").remove();
         db.transaction(function(tx){
                 tx.executeSql('select id, nombre, configJSON  from Formatos ', [], function(tx, results) { 
                     for (i=0;i<results.rows.length ;i++){
@@ -256,7 +260,8 @@ var formatos={
                     }
                     $(".liFormato").on("touchend",function(){
                         var row = JSON.parse($(this).data("data"));
-                        formatos.setFormat(row);
+                        formatos.configuration = JSON.parse(row.configJSON);
+                        formatos.setFormat(r);
                     })
                 });
             }) 
