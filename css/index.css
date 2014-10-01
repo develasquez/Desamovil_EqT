@@ -2,7 +2,6 @@
     padding: 0px;
     color: #fff;
     font-size: 850%;
-    margin-bottom: 50px;
 }
 .correct{
     display: -moz-inline-stack;
@@ -109,10 +108,18 @@
 }
 
 .formatoSeleccionado{
-    margin-left: 1em;
+    padding: 1em 0em 0em 1em;
+    margin-bottom: 1em;
 
 }
-
+.nombreFormato{
+    display: inline-block;
+    margin: .5em;
+}
+.estructuraFormato{
+    display:block;
+    margin-bottom: 1em;
+}
 .char{
     display: inline-block;
     font-style: normal;

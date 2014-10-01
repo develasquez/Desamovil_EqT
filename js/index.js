@@ -72,7 +72,7 @@ $(function(){
     })
 
     //Datos de Prueba 
-    //formatos.displayFormat({text:"SA-161358533-4748"})
+    formatos.displayFormat({text:"SA-161358533-4748"})
     //Datos de Prueba 
 
 
@@ -200,13 +200,16 @@ var formatos={
         length:0,
         caracters:[],
         config:[],
-        divider:''
+        divider:'',
+        sections:[]
+
     },
     addFormat:function(){
         desamovil.pageShow('#nuevoFormato')
         desamovil.scan("#txtNewFormat",formatos.displayFormat);
     },
     displayFormat:function(result,target){
+        debugger;
         if(target == undefined){
             target = "#h3ForatCreator";
         }
@@ -216,13 +219,10 @@ var formatos={
         charCount=0;
         comparationTypeSelected=comparationType.EXCACT;
         textScanned='';
-        name='';
         formatos.configuration= {
-            text:'',
-            length:0,
+            text: result.text,
             caracters:[],
-            config:[],
-            divider:''
+            config:[]
         }
         for (var i = 0; i < result.text.length; i++) {
             var newChar = result.text.substring(i,i+1);
@@ -234,7 +234,7 @@ var formatos={
         $($(".char")[0]).addClass("charSelected");
         formatos.currentChar = $($(".char")[0]).text();
         formatos.textScanned = result.text;
-        $("#lblForatCreator").text(formatos.textScanned);
+        $(".nombreFormato").text(formatos.name);
         formatos.charCount = formatos.textScanned.length;
     },
   	saveFormat:function(fun){
@@ -274,6 +274,7 @@ var formatos={
                     $(".liFormato").on("touchend",function(){
                         var row = JSON.parse($(this).data("data"));
                         formatos.configuration = JSON.parse(row.configJSON);
+                        formatos.name = row.nombre;
                         formatos.setFormat(formatos.configuration);
                     })
                 });
@@ -281,6 +282,53 @@ var formatos={
     },
     setComparationType:function(type){
         formatos.comparationTypeSelected = type;
+    },
+    compare:function () {
+        var match = true;
+        var mensaje = '';
+        var divider = formato.configuration.divider;
+        var sections = formato.configuration.sections;
+        var caracters = formato.configuration.caracters;
+        var config = formato.configuration.config;
+        var validacionSecciones = [];
+        if(formato.configuration.sections.length > 0){
+            var s1 = $("#txtResultado1").val().split(divider);
+            var s2 = $("#txtResultado2").val().split(divider);
+
+            //Comparamos cantidad de Secciones.
+            if (s1.length != s2.length){
+                match = false;
+                mensaje = mensaje + "No coinciden las secciones";
+            }else{
+                for (var i = 0; i < sections.length - 1; i++) {
+                   try{
+
+
+                        try{
+                            validacionSecciones[i] = config[sections[i]+1];
+                        }
+                        catch(ex){
+                            validacionSecciones[i] = comparationType.VARIABLE;
+                        }
+
+                        if (validacionSecciones[i] == comparationType.EXCACT){
+
+                            if (s1[i] != s2[i]){
+                                match = false;
+                            }
+                        }
+                        if (validacionSecciones[i] == comparationType.VARIABLE){
+
+                            if (s1[i] != s2[i]){
+                                match = true;
+                            }
+                        }
+                    }catch(ex){
+                        match = false;
+                    }
+                }
+            }
+        }
     },
     nextChar:function(){
         if(formatos.currentCharIndex < formatos.charCount){
@@ -334,7 +382,14 @@ var formatos={
                        .removeClass("color-grey")
                        .removeClass("color-green")
                        .addClass("color-indigo");
-        
+
+            //Al usar Dividers creamos secciones del Codigo para analizar.
+            //Revisamos si comiensa con un divider, de lo contrartio setemos en -1 el primer divider Imaginario.
+            if (formatos.currentCharIndex > 0 ){
+                formatos.configuration.sections[0] = -1
+            }else{
+                formatos.configuration.sections[formatos.configuration.sections.length] = formatos.currentCharIndex
+            }                  
             formatos.configuration.config[formatos.currentCharIndex] = comparationType.DIVIDER;
             formatos.nextChar();
     }
@@ -359,7 +414,7 @@ var listaItem = function(element){
                             '        <div>',
                             '            <div>',
                             '                <h3>'+element.nombre+'</h3>',
-                            '                <p>'+JSON.parse(element.configJSON).textScanned+'</p>',
+                            '                <p>'+JSON.parse(element.configJSON).text+'</p>',
                             '            </div>',
                             '        </div>                ',
                             '    </li>',
