@@ -24,6 +24,8 @@ $(function(){
     db.transaction(function(tx){
         tx.executeSql('CREATE TABLE IF NOT EXISTS Usuarios (id INTEGER PRIMARY KEY, fullNombre VARCHAR, userName VARCHAR, password VARCHAR, lastLogin )');
         tx.executeSql('CREATE TABLE IF NOT EXISTS Formatos (id INTEGER PRIMARY KEY, nombre VARCHAR, configJSON VARCHAR)');
+        
+            
     }, function(err){}, function(tx,results){
 
     }) 
@@ -34,12 +36,17 @@ $(function(){
         for (i=0;i<results.rows.length ;i++){
             var row = results.rows.item(i);
             if(row.Cant == 0 ){
+                tx.executeSql('insert into Formatos (nombre, configJSON) values (?,?)', ["Automatico",JSON.stringify(formatos.configuration) ]);
+                localStorage.setItem("lastFormat",1);
                 alert("Debe crear un usuario");
                 desamovil.pageShow("#crearUsuario");
             }else{
                 $(".header").hide();
                 desamovil.pageShow("#login"); //nuevoFormato
-
+                formatos.getFormatsById(localStorage.getItem("lastFormat"),function (row) {
+                    formatos.configuration = JSON.parse(row.configJSON);
+                    $(".nombreFormato").text(row.nombre);
+                })
             }
         }
     })
@@ -60,8 +67,11 @@ $(function(){
     $("#btnVariable").on("touchend",function(){
         formatos.variableChar()
     })
-    $("#btnSeparador").on("touchend",function(){
-        formatos.dividerChar()
+    $("#btnAddSeccion").on("touchend",function(){
+        formatos.addSecction()
+    })
+    $("#btnRemoveSeccion").on("touchend",function(){
+        formatos.removeSection()
     })
 
     $("#btnCrearFormato").on("touchend",function(){
@@ -71,8 +81,11 @@ $(function(){
         })
     })
 
+
+
+
     //Datos de Prueba 
-    formatos.displayFormat({text:"SA-161358533-4748"})
+    ////formatos.displayFormat({text:"SA-161358533-4748"})
     //Datos de Prueba 
 
 
@@ -128,7 +141,7 @@ var desamovil = {
             _fun(result);
         },function () {
             
-        });
+        }, { quality: 100 });
     },
     clean: function (element) {
       $(element).val("");
@@ -209,7 +222,7 @@ var formatos={
         desamovil.scan("#txtNewFormat",formatos.displayFormat);
     },
     displayFormat:function(result,target){
-        debugger;
+    
         if(target == undefined){
             target = "#h3ForatCreator";
         }
@@ -222,7 +235,8 @@ var formatos={
         formatos.configuration= {
             text: result.text,
             caracters:[],
-            config:[]
+            config:[],
+            sections:[]
         }
         for (var i = 0; i < result.text.length; i++) {
             var newChar = result.text.substring(i,i+1);
@@ -258,6 +272,16 @@ var formatos={
         //3º se carga algoritmo de validacion.
         
     },
+    getFormatsById:function (id,fun) {
+        db.transaction(function(tx){
+            tx.executeSql('select id, nombre, configJSON  from Formatos where id = ?', [id], function(tx, results) { 
+                    for (i=0;i<results.rows.length ;i++){
+                        var row = results.rows.item(i);
+                        fun(row);
+                    }
+                });
+        })
+    },
     loadFormats:function(){
         $("#listaFormatos a").remove();
         db.transaction(function(tx){
@@ -283,7 +307,29 @@ var formatos={
     setComparationType:function(type){
         formatos.comparationTypeSelected = type;
     },
-    compare:function () {
+    compare:{
+        auto: function (s1,s2) {
+            if(s2.indexOf(s1) == 0 ){
+                return true;
+            }else{
+                return false;
+            }
+        },
+        custom:function (s1,s2,config) {
+            //Se entiende que el Primer Codigo coincide con la Logica Seleccionada en cada seccion.
+            //A35;   mm
+            //A3 ;   
+            
+
+        }
+
+    }
+
+   /* function () {
+
+
+
+
         var match = true;
         var mensaje = '';
         var divider = formato.configuration.divider;
@@ -294,13 +340,21 @@ var formatos={
         if(formato.configuration.sections.length > 0){
             var s1 = $("#txtResultado1").val().split(divider);
             var s2 = $("#txtResultado2").val().split(divider);
+             for (var i = 0; i < sections.length - 1; i++) {
+                //recorremos Cada letra de la seccion.
+                var bubble = s1[1].substring(0,1);
+                var equals = true;
+                for(var j = 0 ; j< s1[1].length; j++){
+                    if(bubble != config[sections[i]+(j+1)]){
+                        equals = false;
+                    }
+                }
+                if (equals)
 
-            //Comparamos cantidad de Secciones.
-            if (s1.length != s2.length){
-                match = false;
-                mensaje = mensaje + "No coinciden las secciones";
-            }else{
-                for (var i = 0; i < sections.length - 1; i++) {
+
+
+
+
                    try{
 
 
@@ -327,9 +381,14 @@ var formatos={
                         match = false;
                     }
                 }
-            }
+
+
+
+
+
         }
-    },
+    }*/
+    ,
     nextChar:function(){
         if(formatos.currentCharIndex < formatos.charCount){
             formatos.currentCharIndex++;
@@ -376,7 +435,7 @@ var formatos={
             formatos.configuration.config[formatos.currentCharIndex] = comparationType.VARIABLE;
             formatos.nextChar();
     },
-    dividerChar:function () {
+    addSecction:function () {
          var charElement = $($(".char")[formatos.currentCharIndex])
             charElement.removeClass("color-red")
                        .removeClass("color-grey")
@@ -385,6 +444,7 @@ var formatos={
 
             //Al usar Dividers creamos secciones del Codigo para analizar.
             //Revisamos si comiensa con un divider, de lo contrartio setemos en -1 el primer divider Imaginario.
+            debugger;
             if (formatos.currentCharIndex > 0 ){
                 formatos.configuration.sections[0] = -1
             }else{
@@ -392,6 +452,20 @@ var formatos={
             }                  
             formatos.configuration.config[formatos.currentCharIndex] = comparationType.DIVIDER;
             formatos.nextChar();
+    },
+    removeSecction:function () {
+         var charElement = $($(".char")[formatos.currentCharIndex])
+            charElement.removeClass("color-red")
+                       .removeClass("color-grey")
+                       .removeClass("color-green")
+                       .removeClass("color-indigo");
+
+            if(formatos.configuration.config[formatos.currentCharIndex] == comparationType.DIVIDER){
+                var index = formatos.configuration.sections.indexOf(formatos.currentCharIndex);
+                if (index > -1) {
+                    formatos.configuration.sections.splice(index, 1);
+                }
+            }          
     }
 
 }
@@ -403,7 +477,7 @@ monomer.setInterval= function (_window,_content,em) {
 }
 
 var listaItem = function(element){ 
-                    debugger;
+                
                     return['<a id="'+element.id+'" href="#" class="liFormato">',
                             '    <li>',
                             '        <div>',

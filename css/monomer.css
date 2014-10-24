@@ -97,6 +97,8 @@ border: none;
     position:absolute;
     height: 0px;
     width: 0px;
+    -webkit-border-radius: 50%; 
+    -moz-border-radius: 50%; 
     border-radius: 50%;
     transition: border .264s, top .264s, left .264s, visibility .264s;
     -webkit-transition: border .264s, top .264s, left .264s visibility .264s;
@@ -138,6 +140,8 @@ border: none;
     *display: inline;
     zoom: 1;
     font-size: 90%;
+    -webkit-border-radius: 4px; 
+    -moz-border-radius: 4px; 
     border-radius: 4px;
     overflow:hidden;
     position:relative;
@@ -212,6 +216,8 @@ border: none;
 .floating-button{
     width: 56px;
     height: 56px;
+    -webkit-border-radius: 50%; 
+    -moz-border-radius: 50%; 
     border-radius: 50%;
     border: none;
     background-color: #ccc;
@@ -236,6 +242,8 @@ border: none;
     zoom: 1;
     height: 2.5em;
     padding:0em 1.5em 0em 1.5em;
+    -webkit-border-radius: 2px; 
+    -moz-border-radius: 2px; 
     border-radius: 2px;
     border: none;
     background-color:rgba(0,0,0,0);
@@ -312,6 +320,8 @@ border: none;
     height: auto !important;
     top: 10px;
     left: 0px;
+    -webkit-border-radius: 4px; 
+    -moz-border-radius: 4px; 
     border-radius: 4px;
     -webkit-transform: scaleY(0);
     -webkit-transform-origin: top;
@@ -606,6 +616,8 @@ input[type="search"]{
     zoom: 1;
     border: solid 1px #DBDBDB;
     padding-left:1em;
+    -webkit-border-radius: 1em; 
+    -moz-border-radius: 1em; 
     border-radius: 1em;
     width:1px;
     transition: width 1s;
@@ -632,6 +644,8 @@ input[type="checkbox"]:not(.toggle):before{
     font-style: normal;
     font-weight: normal;
     line-height: 1;
+    -webkit-border-radius: 8px; 
+    -moz-border-radius: 8px; 
     border-radius: 8px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -659,6 +673,8 @@ input[type="checkbox"]:not(.toggle):checked:before{
     font-style: normal;
     font-weight: normal;
     line-height: 1;
+    -webkit-border-radius: 8px; 
+    -moz-border-radius: 8px; 
     border-radius: 8px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -718,6 +734,8 @@ input[type="text"],input[type="password"],input[type="number"],input[type="datet
     font-style: normal;
     font-weight: normal;
     line-height: 1;
+    -webkit-border-radius: 8px; 
+    -moz-border-radius: 8px; 
     border-radius: 8px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -735,6 +753,8 @@ input[type="text"],input[type="password"],input[type="number"],input[type="datet
     font-style: normal;
     font-weight: normal;
     line-height: 1;
+    -webkit-border-radius: 8px; 
+    -moz-border-radius: 8px; 
     border-radius: 8px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -763,6 +783,8 @@ input[type="radio"]:before{
     font-style: normal;
     font-weight: normal;
     line-height: 1;
+    -webkit-border-radius: 50%; 
+    -moz-border-radius: 50%; 
     border-radius: 50%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -782,6 +804,8 @@ input[type="radio"]:checked:before{
     font-style: normal;
     font-weight: normal;
     line-height: 1;
+    -webkit-border-radius: 50%; 
+    -moz-border-radius: 50%; 
     border-radius: 50%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -895,6 +919,8 @@ input[type="radio"]:checked:before{
 .lista.divider li:hover{
     -webkit-box-shadow: 3px 5px 18px -1px #8c8c8c;
     box-shadow: 3px 5px 18px -1px #8c8c8c;
+    -webkit-border-radius: 4px; 
+    -moz-border-radius: 4px; 
     border-radius: 4px;
 }
 
