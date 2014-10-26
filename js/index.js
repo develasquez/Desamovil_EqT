@@ -6,8 +6,7 @@ var app = {
         document.ºEventListener('deviceready', this.onDeviceReady, false);
     },
     onDeviceReady: function() {
-        app.receivedEvent('devic
-            eready');
+        app.receivedEvent('deviceready');
 
     },
     receivedEvent: function(id) {
