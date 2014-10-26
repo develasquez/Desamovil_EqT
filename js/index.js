@@ -320,8 +320,10 @@ var formatos={
         auto: function (s1,s2) {
             if(s2.indexOf(s1) == 0 ){
                 return true;
+                alert("true");
             }else{
                 return false;
+                alert("false");
             }
         },
         custom:function (s1,s2,config) {
