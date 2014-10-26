@@ -74,7 +74,7 @@ $(function(){
         formatos.removeSection()
     })
     $("#btnScan1").on("click",function () {
-        desamovil.scan('#txtResultado2',function () {
+        desamovil.scan('#txtResultado1',function () {
             //formatos.compare["auto"]();
         });
     })
