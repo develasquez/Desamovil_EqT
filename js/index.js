@@ -80,7 +80,7 @@ $(function(){
     })
     $("#btnScan2").on("click",function () {
         desamovil.scan('#txtResultado2',function (result) {
-            formatos.compare["auto"]();
+            formatos.compare["auto"]($("#txtResultado1").val(),$("#txtResultado2").val());
         });
     })
     $("#btnCrearFormato").on("touchend",function(){
