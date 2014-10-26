@@ -6,7 +6,8 @@ var app = {
         document.ºEventListener('deviceready', this.onDeviceReady, false);
     },
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+        app.receivedEvent('devic
+            eready');
 
     },
     receivedEvent: function(id) {
@@ -73,7 +74,16 @@ $(function(){
     $("#btnRemoveSeccion").on("touchend",function(){
         formatos.removeSection()
     })
-
+    $("#btnScan1").on("click",function () {
+        desamovil.scan('#txtResultado2',function () {
+            //formatos.compare["auto"]();
+        });
+    })
+    $("#btnScan2").on("click",function () {
+        desamovil.scan('#txtResultado2',function (result) {
+            formatos.compare["auto"]();
+        });
+    })
     $("#btnCrearFormato").on("touchend",function(){
         formatos.saveFormat(function(tx,results){
             formatos.loadFormats();
