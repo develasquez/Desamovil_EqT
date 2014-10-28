@@ -80,7 +80,7 @@ $(function(){
     })
     $("#btnScan2").on("click",function () {
         desamovil.scan('#txtResultado2',function (result) {
-            formatos.compare["auto"]($("#txtResultado1").val(),$("#txtResultado2").val());
+            formatos.compare.auto($("#txtResultado1").val(),$("#txtResultado2").val());
         });
     })
     $("#btnCrearFormato").on("touchend",function(){
@@ -320,10 +320,8 @@ var formatos={
         auto: function (s1,s2) {
             if(s2.indexOf(s1) == 0 ){
                 return true;
-                alert("true");
             }else{
                 return false;
-                alert("false");
             }
         },
         custom:function (s1,s2,config) {
@@ -334,7 +332,8 @@ var formatos={
 
         }
 
-    }
+    },
+
 
    /* function () {
 
