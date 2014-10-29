@@ -74,22 +74,28 @@ $(function(){
         formatos.removeSection()
     })
     $("#btnScan1").on("click",function () {
+
         desamovil.scan('#txtResultado1',function () {
-            var resultado = formatos.compare.auto($("#txtResultado1").val(),$("#txtResultado2").val());
-            if (resultado == true){
-                addMatch(); 
-            }else{
-                addError();
+            if($("#txtResultado1").val().length > 0 && $("#txtResultado2").val().length > 0){
+                var resultado = formatos.compare.auto($("#txtResultado1").val(),$("#txtResultado2").val());
+                if (resultado == true){
+                    addMatch(); 
+                }else{
+                    addError();
+                }
             }
         });
+            
     })
     $("#btnScan2").on("click",function () {
         desamovil.scan('#txtResultado2',function (result) {
-            var resultado = formatos.compare.auto($("#txtResultado1").val(),$("#txtResultado2").val());
-            if (resultado == true){
-                addMatch(); 
-            }else{
-                addError();
+            if($("#txtResultado1").val().length > 0 && $("#txtResultado2").val().length > 0){
+                var resultado = formatos.compare.auto($("#txtResultado1").val(),$("#txtResultado2").val());
+                if (resultado == true){
+                    addMatch(); 
+                }else{
+                    addError();
+                }
             }
         });
     })
