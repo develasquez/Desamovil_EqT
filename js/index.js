@@ -75,7 +75,12 @@ $(function(){
     })
     $("#btnScan1").on("click",function () {
         desamovil.scan('#txtResultado1',function () {
-            //formatos.compare["auto"]();
+            var resultado = formatos.compare.auto($("#txtResultado1").val(),$("#txtResultado2").val());
+            if (resultado == true){
+                addMatch(); 
+            }else{
+                addError();
+            }
         });
     })
     $("#btnScan2").on("click",function () {
@@ -109,6 +114,7 @@ var errors = 0 ;
 function addMatch() {
    matchs++;
    $(".correct .valor").text(matchs.toString());
+   $("#txtResultado2").removeClass("error");
    $("#player").attr("src","resources/success.mp3");
    $("#player")[0].load();
    setTimeout(function () {
@@ -119,6 +125,7 @@ function addMatch() {
 function addError() {
    errors++;
    $(".errors .valor").text(errors.toString());
+   $("#txtResultado2").addClass("error");
    $("#player").attr("src","resources/error.mp3");
    $("#player")[0].load();
    setTimeout(function () {

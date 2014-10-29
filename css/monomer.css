@@ -427,6 +427,10 @@ border: none;
     border:solid 1px #607d8b;
 }
 
+.error{
+    background-color: #f36c60;
+    border-color: #e84e40;
+}
 
 
 .color-red, .icon-red{
