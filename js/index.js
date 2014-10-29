@@ -80,7 +80,12 @@ $(function(){
     })
     $("#btnScan2").on("click",function () {
         desamovil.scan('#txtResultado2',function (result) {
-            formatos.compare.auto($("#txtResultado1").val(),$("#txtResultado2").val());
+            var resultado = formatos.compare.auto($("#txtResultado1").val(),$("#txtResultado2").val());
+            if (resultado == true){
+                addMatch(); 
+            }else{
+                addError();
+            }
         });
     })
     $("#btnCrearFormato").on("touchend",function(){
@@ -99,10 +104,23 @@ $(function(){
 
 
 });
+var matchs = 0;
+var errors = 0 ;
+function addMatch() {
+   matchs++;
+   $(".correct .valor").text(matchs.toString());
+   $("#player").attr("src","resources/success.mp3");
+   $("#player")[0].load();
+   $("#player")[0].play();
+}
 
-
-
-
+function addError() {
+   errors++;
+   $(".errors .valor").text(errors.toString());
+   $("#player").attr("src","resources/error.mp3");
+   $("#player")[0].load();
+   $("#player")[0].play();
+}
 
 
 var desamovil = {
@@ -332,8 +350,7 @@ var formatos={
 
         }
 
-    },
-
+    }
 
    /* function () {
 
