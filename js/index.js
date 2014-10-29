@@ -111,7 +111,9 @@ function addMatch() {
    $(".correct .valor").text(matchs.toString());
    $("#player").attr("src","resources/success.mp3");
    $("#player")[0].load();
-   $("#player")[0].play();
+   setTimeout(function () {
+       $("#player")[0].play();
+   },500);
 }
 
 function addError() {
@@ -119,7 +121,9 @@ function addError() {
    $(".errors .valor").text(errors.toString());
    $("#player").attr("src","resources/error.mp3");
    $("#player")[0].load();
-   $("#player")[0].play();
+   setTimeout(function () {
+       $("#player")[0].play();
+   },500);
 }
 
 
